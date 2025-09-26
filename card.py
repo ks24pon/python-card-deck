@@ -99,13 +99,25 @@ class Dealer:
           value += card.intValue
         return value if 21 >= value >= 1 else 0
 
-# PlayerAの手札
-card1 = Card("♦︎","A", 1)
-card2 = Card("♦︎","K", 11)
+# 計算のみを行うクラス
+class HelperFunctions:
 
-# PlayerBの手札
-card3 = Card("♦︎","9", 9)
-card4 = Card("♦︎","K", 13)
+  # 数値で構成される配列を受け取り、最大値のインデックスを返却
+  @staticmethod
+  def maxInArrayIndex(intArr):
+    maxIndex = 0
+    maxValue = intArr[0]
+    for i, num in enumerate(intArr):
+        if num > maxValue:
+          maxValue = num
+          maxIndex = i
 
-print(Dealer.score21Individual([card1, card2]))
-print(Dealer.score21Individual([card3, card4]))
+    return maxIndex
+
+# 最大値19
+arr1 = [1, 9, 19, 3, 4, 6]
+print(HelperFunctions.maxInArrayIndex(arr1))
+
+# 最大値5
+arr2 = [5, 2, 1, 3, 5, 5]
+print(HelperFunctions.maxInArrayIndex(arr2))
