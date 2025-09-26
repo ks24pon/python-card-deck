@@ -1,5 +1,6 @@
 import random
 
+# カード
 class Card:
   # インスタンス生成のためのコンストラクタ
   def __init__(self, value, suit, intValue):
@@ -49,8 +50,35 @@ class Deck:
       self.deck[i] = self.deck[j]
       self.deck[j] = temp
 
-deck1 = Deck()
-deck1.shuffleDeck()
+# ディーラー
+class Dealer:
 
-# ドローしたカードを表示
-print(deck1.draw().getCardString())
+  @staticmethod
+  def startGame(amountOfPlayers):
+    # 卓の情報
+    table = {
+      "players": [],
+      "deck": Deck()
+    }
+
+    # デッキをシャッフル
+    table["deck"].shuffleDeck()
+
+    for person in range(0,amountOfPlayers):
+      # プレイヤーの手札
+      playerCard = []
+      # ブラックジャックの手札は2枚
+      for i in range (0, 2):
+          playerCard.append(table["deck"].draw())
+      table["players"].append(playerCard)
+
+    # tableのプレイヤー全員の手札を返す
+    return table["players"]
+
+
+# 卓の設定2players
+table1 = Dealer.startGame(2)
+
+# 1人目のplayerの手札をfor文
+for i in range(0, 2):
+    print(table1[0][i].getCardString())
