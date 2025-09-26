@@ -53,32 +53,36 @@ class Deck:
 # ディーラー
 class Dealer:
 
-  @staticmethod
-  def startGame(amountOfPlayers):
-    # 卓の情報
-    table = {
-      "players": [],
-      "deck": Deck()
-    }
+    @staticmethod
+    def startGame(amountOfPlayers, gameMode):
+      table = {
+        "players": [],
+        "gameMode": gameMode,
+        "deck": Deck()
+      }
 
-    # デッキをシャッフル
-    table["deck"].shuffleDeck()
+      table["deck"].shuffleDeck()
 
-    for person in range(0,amountOfPlayers):
-      # プレイヤーの手札
-      playerCard = []
-      # ブラックジャックの手札は2枚
-      for i in range (0, 2):
-          playerCard.append(table["deck"].draw())
-      table["players"].append(playerCard)
+      for person in range(0, amountOfPlayers):
+        playerCard = []
+        # ブラックジャックの時から書き換え
+        for i in range(0, Dealer.initialCards(gameMode)):
+            playerCard.append(table["deck"].draw())
+        table["players"].append(playerCard)
 
-    # tableのプレイヤー全員の手札を返す
-    return table["players"]
+      return table["players"]
 
+    # ゲームの内容によって手札を変更
+    @staticmethod
+    def initialCards(gameMode):
+        if gameMode == "21":
+            return 2
+        if gameMode == "poker":
+            return 5
 
-# 卓の設定2players
-table1 = Dealer.startGame(2)
+# 卓の設定2 players、ポーカー
+table1 = Dealer.startGame(2, "poker")
 
-# 1人目のplayerの手札をfor文
-for i in range(0, 2):
-    print(table1[0][i].getCardString())
+# 1人目のplayerの手札をfor文で出力
+for i in range (0,Dealer.initialCards("poker")):
+  print(table1[0][i].getCardString())
