@@ -1,3 +1,5 @@
+import random
+
 class Card:
   # インスタンス生成のためのコンストラクタ
   def __init__(self, value, suit, intValue):
@@ -34,6 +36,19 @@ class Deck:
       for card in self.deck:
         print(card.getCardString())
 
+  # カードをランダムに入れ替える関数
+  def shuffleDeck(self):
+    deckSize = len(self.deck)
+    for i in range(deckSize -1, 0, -1):
+      j = random.randint(i, deckSize-1)
+      temp = self.deck[i]
+      self.deck[i] = self.deck[j]
+      self.deck[j] = temp
+
 # コンソールで確認
 card1 = Deck()
+card1.printDeck()
+
+# コンソールでシャッフルされたデッキを確認
+card1.shuffleDeck()
 card1.printDeck()
