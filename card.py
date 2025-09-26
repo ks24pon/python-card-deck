@@ -90,9 +90,22 @@ class Dealer:
             for card in player:
                 print(card.getCardString())
 
+    # 手札を受け取って合計値計算する関数
+    # ブラックジャックは合計値が21を超えるとOUTなのでその場合Oを返す
+    @staticmethod
+    def score21Individual(cards):
+        value = 0
+        for card in cards:
+          value += card.intValue
+        return value if 21 >= value >= 1 else 0
 
-# 卓の設定2 players、ポーカー
-table1 = Dealer.startGame(2, "poker")
+# PlayerAの手札
+card1 = Card("♦︎","A", 1)
+card2 = Card("♦︎","K", 11)
 
-# 卓の情報を表示
-Dealer.printTableInformation(table1)
+# PlayerBの手札
+card3 = Card("♦︎","9", 9)
+card4 = Card("♦︎","K", 13)
+
+print(Dealer.score21Individual([card1, card2]))
+print(Dealer.score21Individual([card3, card4]))
