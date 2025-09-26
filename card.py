@@ -70,7 +70,7 @@ class Dealer:
             playerCard.append(table["deck"].draw())
         table["players"].append(playerCard)
 
-      return table["players"]
+      return table
 
     # ゲームの内容によって手札を変更
     @staticmethod
@@ -80,9 +80,19 @@ class Dealer:
         if gameMode == "poker":
             return 5
 
+    # 卓の情報を表示するメソッドを作成
+    @staticmethod
+    def printTableInformation(table):
+        print("Amount of players: " + str(len(table["players"])) + "... Game mode: " + table["gameMode"] + ". At this table: ")
+
+        for i, player in enumerate(table["players"]):
+            print(str(i + 1) + "player's cards:")
+            for card in player:
+                print(card.getCardString())
+
+
 # 卓の設定2 players、ポーカー
 table1 = Dealer.startGame(2, "poker")
 
-# 1人目のplayerの手札をfor文で出力
-for i in range (0,Dealer.initialCards("poker")):
-  print(table1[0][i].getCardString())
+# 卓の情報を表示
+Dealer.printTableInformation(table1)
