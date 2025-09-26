@@ -30,6 +30,10 @@ class Deck:
 
     return newDeck
 
+  # カードをドロー
+  def draw(self):
+    return self.deck.pop()
+
   # デッキにあるカードを全て表示
   def printDeck(self):
       print("Displaying cards...")
@@ -45,10 +49,8 @@ class Deck:
       self.deck[i] = self.deck[j]
       self.deck[j] = temp
 
-# コンソールで確認
-card1 = Deck()
-card1.printDeck()
+deck1 = Deck()
+deck1.shuffleDeck()
 
-# コンソールでシャッフルされたデッキを確認
-card1.shuffleDeck()
-card1.printDeck()
+# ドローしたカードを表示
+print(deck1.draw().getCardString())
