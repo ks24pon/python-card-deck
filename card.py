@@ -24,11 +24,16 @@ class Deck:
 
     for suit in suits:
       for i, value in enumerate(values):
-        # 入るカードが何か確認
-        print(Card(value, suit, i + 1).getCardString())
         newDeck.append(Card(value, suit, i + 1))
-    
+
     return newDeck
 
-# デッキ生成
-Deck()
+  # デッキにあるカードを全て表示
+  def printDeck(self):
+      print("Displaying cards...")
+      for card in self.deck:
+        print(card.getCardString())
+
+# コンソールで確認
+card1 = Deck()
+card1.printDeck()
